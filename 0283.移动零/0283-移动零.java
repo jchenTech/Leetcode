@@ -1,18 +1,21 @@
 class Solution {
+    /*
+     * 创建一个index指针，记录非零元素应存放的位置，遍历数组当不为零时
+     * nums[index] = nums[i]，并将nums[i]置为0
+    */
     public void moveZeroes(int[] nums) {
         if (nums == null) {
             return;
         }
-        //使用双指针i,j，用指针i遍历数组，用指针j记录非0元素的下标
-        int j = 0;
+        int index = 0;
         for (int i = 0; i < nums.length; i++) {
             if (nums[i] != 0) {
-                nums[j++] = nums[i];
+                nums[index] = nums[i];
+                index++;
             }
         }
-        
-        for (int i = j; i < nums.length; i++) {
-            nums[i] = 0;
+        for (int j = index; j < nums.length; j++) {
+            nums[j] = 0;
         }
     }
 }
