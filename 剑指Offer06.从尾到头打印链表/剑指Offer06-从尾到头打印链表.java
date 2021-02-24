@@ -7,43 +7,26 @@
  * }
  */
 class Solution {
-    /** 方法一：辅助栈法
-     * 将链表节点循环压入栈中，依靠栈后进先出的性质，将栈中节点打印
-     */
+    /**
+    递归模板：1、确定终止条件：当head为空时；
+    2、找返回值，应该给上级返回什么
+    3、本级递归应该做什么
+    */
+    ArrayList<Integer> list = new ArrayList<>();
     public int[] reversePrint(ListNode head) {
-        Stack<ListNode> stack = new Stack<>();
-        ListNode temp = head;
-        while (temp != null) {
-            stack.push(temp);
-            temp = temp.next;
-        }
-        int size = stack.size();
-        int[] array = new int [size];
-        for (int i = 0; i < size; i++) {
-            array[i] = stack.pop().val;
-        }
-        return array;
-    }
-    
-    /** 方法二：递归法
-    * 使用head.next循环递归head节点,当为空时返回，并回溯将节点值添加到
-    * 列表中，然后将列表中的值赋给数组并返回
-    ArrayList<Integer> temp = new ArrayList<>();
-    public int[] reversePrint(ListNode head){
         recur(head);
-        int[] res = new int[temp.size()];
-        for (int i = 0; i < res.length; i++) {
-            res[i] = temp.get(i);
+        int[] res = new int[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            res[i] = list.get(i);
         }
         return res;
     }
-    
-    public void recur(ListNode head) {
+
+    private void recur(ListNode head) {
         if (head == null) {
             return;
         }
         recur(head.next);
-        temp.add(head.val);
+        list.add(head.val);
     }
-    */
 }

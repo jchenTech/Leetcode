@@ -1,28 +1,15 @@
 class Solution {
-    /**使用递归方法（超时！！！） 
-    int constant = 1000000007;
+    //dp[i] = dp[i - 1] + dp[i -2];
     public int fib(int n) {
-        if (n < 2){
+        if (n < 2) {
             return n;
         }
-        int ans = (fib(n-1) + fib(n-2)) % constant; //此处是为了避免在循环过程中内存溢出
-        return ans;
-    }
-    */ 
-    
-    /** 使用循环 */ 
-    int constant = 1000000007;
-    public int fib(int n) {
-        if (n < 2){
-            return n;
-        }
-        int a = 0;
-        int b = 1;
+        int pre1 = 0, pre2 = 1;
         for (int i = 2; i <= n; i++) {
-            int temp = b;
-            b = (a + b) % constant;
-            a = temp;
+            int cur = (pre1 + pre2) % 1000000007;
+            pre1 = pre2;
+            pre2 = cur;
         }
-        return b;
+        return pre2;
     }
 }

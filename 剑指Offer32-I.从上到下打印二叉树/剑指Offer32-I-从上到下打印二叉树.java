@@ -9,25 +9,21 @@
  */
 class Solution {
     public int[] levelOrder(TreeNode root) {
-        if(root == null) {
+        if (root == null) {
             return new int[0];
         }
         Queue<TreeNode> queue = new LinkedList<>();
+        List<TreeNode> ans = new ArrayList<>();
         queue.add(root);
-        ArrayList<Integer> ans = new ArrayList<>();
         while (!queue.isEmpty()) {
             TreeNode node = queue.poll();
-            ans.add(node.val);
-            if (node.left != null) {
-                queue.add(node.left);
-            }
-            if (node.right != null) {
-                queue.add(node.right);
-            }
+            ans.add(node);
+            if (node.left != null) queue.offer(node.left);
+            if (node.right != null) queue.offer(node.right);
         }
         int[] res = new int[ans.size()];
         for (int i = 0; i < ans.size(); i++) {
-            res[i] = ans.get(i);
+            res[i] = ans.get(i).val;
         }
         return res;
     }

@@ -12,11 +12,10 @@ class Solution {
         if (root == null) {
             return null;
         }
-        TreeNode temp = root.left;
-        root.left = root.right;
-        root.right = temp;
-        mirrorTree(root.left);
-        mirrorTree(root.right);
+        TreeNode left = mirrorTree(root.left);
+        TreeNode right = mirrorTree(root.right);
+        root.left = right;
+        root.right = left;
         return root;
     }
 }

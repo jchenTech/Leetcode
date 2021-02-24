@@ -12,22 +12,23 @@ class Solution {
         if (root == null) {
             return new ArrayList<>();
         }
+        List<List<Integer>> res = new ArrayList<>();
         Queue<TreeNode> queue = new LinkedList<>();
         queue.add(root);
-        List<List<Integer>> res = new ArrayList<>();
         while (!queue.isEmpty()) {
-            LinkedList<Integer> tmp = new LinkedList<>();
+            //由于需要之字顺序打印，因此选择linkedList数据结构
+            LinkedList<Integer> oneLevel = new LinkedList<>();
             for (int i = queue.size(); i > 0; i--) {
                 TreeNode node = queue.poll();
-                if (res.size() % 2 == 0) { // 偶数层 -> addLast
-                    tmp.addLast(node.val);
-                }else {//奇数层 -> addFirst
-                    tmp.addFirst(node.val);
+                if (res.size() % 2 == 0) {//oushuceng
+                    oneLevel.addLast(node.val);
+                }else {
+                    oneLevel.addFirst(node.val);
                 }
-                if (node.left != null) queue.add(node.left);
-                if (node.right != null) queue.add(node.right);
+                if (node.left != null) queue.offer(node.left);
+                if (node.right != null) queue.offer(node.right);
             }
-            res.add(tmp);
+            res.add(oneLevel);
         }
         return res;
     }

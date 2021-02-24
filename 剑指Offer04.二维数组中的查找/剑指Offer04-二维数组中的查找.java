@@ -1,27 +1,25 @@
 class Solution {
-    /** 二维数组中查找元素
-     * 思路：利用二分查找的思想，从二维数组右上方进行查找，如果target值小，则col--；
-     * 若target值大则row++；若相等则返回。
-     */
+    /**
+    * 从矩阵的右上角进行遍历，当target大于当前元素，则往左遍历，若小于，则向下遍历
+    */
     public boolean findNumberIn2DArray(int[][] matrix, int target) {
-        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+        if (matrix == null || matrix.length == 0) {
             return false;
         }
-
-        int n = matrix.length;
-        int m = matrix[0].length;
-
-        int row = 0;
-        int col = m - 1;
-        while (row < n && col >= 0) {
-            if (target < matrix[row][col]) {
-                col--;
-            }else if (target > matrix[row][col]) {
-                row++;
+        int row = matrix.length;
+        int col = matrix[0].length;
+        int i = 0;
+        int j = col - 1;
+        while (i < row && j >= 0) {
+            if (matrix[i][j] > target) {
+                j--;
+            }else if (matrix[i][j] < target) {
+                i++;
             }else {
                 return true;
             }
         }
         return false;
+        
     }
 }

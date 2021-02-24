@@ -4,11 +4,11 @@ class Solution {
         int i = 0;
         for (int num : pushed) {
             stack.push(num);
-            while (!stack.empty() && stack.peek() == popped[i]) {
+            while (!stack.isEmpty() && stack.peek() == popped[i]) {
                 stack.pop();
                 i++;
             }
         }
-        return (stack.empty());
+        return stack.isEmpty();
     }
 }

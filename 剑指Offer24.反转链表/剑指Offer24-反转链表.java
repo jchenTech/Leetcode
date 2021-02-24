@@ -7,18 +7,15 @@
  * }
  */
 class Solution {
-    /**
-    * 采用双指针迭代法反转链表
-    */ 
+    /**递归
+    */
     public ListNode reverseList(ListNode head) {
-        ListNode prev = null;
-        ListNode cur = head;
-        while (cur != null) {
-            ListNode tmp = cur.next;
-            cur.next = prev;
-            prev = cur;
-            cur = tmp;
+        if (head == null || head.next == null) {
+            return head;
         }
-        return prev;
+        ListNode cur = reverseList(head.next);
+        head.next.next = head;
+        head.next = null;
+        return cur;
     }
 }

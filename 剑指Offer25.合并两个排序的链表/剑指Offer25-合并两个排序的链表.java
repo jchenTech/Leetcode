@@ -7,7 +7,6 @@
  * }
  */
 class Solution {
-    /*Ñ­»··¨*/
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         ListNode dum = new ListNode(-1);
         ListNode cur = dum;

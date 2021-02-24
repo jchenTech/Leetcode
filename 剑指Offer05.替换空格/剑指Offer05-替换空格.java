@@ -20,12 +20,4 @@ class Solution {
         String newString = new String(array, 0, size);
         return newString;
     }
-
-    /** 方法二：
-     *  使用java内置方法String.replace进行替换
-    
-    public String replaceSpace(String s) {
-        return s.replace(" ", "%20");
-    }
-    */
 }

@@ -1,31 +1,32 @@
 class Solution {
+    /**深度优先搜索+回溯
+    */
+    int m, n, k;
+    boolean[][] visited;
     public int movingCount(int m, int n, int k) {
-        boolean[][] visited = new boolean[m][n];
-        return dfs(0, 0, m, n, k, visited);
+        this.m = m; this.n = n; this.k = k;
+        visited = new boolean[m][n];
+        return dfs(0, 0);
     }
-    
-    private int dfs(int i, int j, int m, int n, int k, boolean[][] visited) {
-        //失败条件：越界或数位和大于k，或节点已访问
-        if (i > m - 1 || j > n -1 || sums(i, j) > k || visited[i][j]) {
+
+    private int dfs(int i, int j) {
+        int si = sums(i);
+        int sj = sums(j);
+        //终止条件：1、索引超出m×n方格边界 2、i,j的数位和相加大于k 3、当前元素已经访问过
+        if (i >= m || j >= n || si + sj > k || visited[i][j] == true) {
             return 0;
         }
         visited[i][j] = true;
-        //本来机器人可以从四个方向走，但是在这个题中，机器人只需要向右和向下走就可以了
-        return 1 + dfs(i + 1, j, m, n, k, visited) + dfs(i, j + 1, m, n, k, visited);
+        //向下、右搜索，机器人的运动范围为0,0该点和其下方和右方的运动范围相加
+        return 1 + dfs(i + 1, j) + dfs(i, j + 1);
     }
-    
-    // 计算两个数的数位和
-    private int sums(int i, int j) {
-        int sumi = 0;
-        int sumj = 0;
-        while (i != 0) {
-            sumi += i % 10;
-            i = i / 10; 
+
+    private int sums(int x) {
+        int sum = 0;
+        while (x != 0) {
+            sum += x % 10;
+            x = x / 10;
         }
-        while (j != 0) {
-            sumj += j % 10;
-            j = j / 10; 
-        }
-        return sumi + sumj;
+        return sum;
     }
 }

@@ -8,20 +8,19 @@
  */
 class Solution {
     public ListNode deleteNode(ListNode head, int val) {
-        if (head.val == val) {
-            return head.next;
+        if (head == null) {
+            return null;
         }
-
-        ListNode pre = head;
-        ListNode cur = head.next;
-        
-        while (cur != null && cur.val != val) {
-            pre = cur;
-            cur = cur.next;
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode pre = dummy;
+        while (head != null) {
+            if (head.val == val) {
+                pre.next = head.next;
+            }
+            pre = head;
+            head = head.next;
         }
-        if (cur != null) {
-            pre.next = cur.next;
-        }
-        return head;
+        return dummy.next;
     }
 }
